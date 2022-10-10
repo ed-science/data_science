@@ -7,9 +7,9 @@ class Data():
         self.conn = sqlite3.connect(data)
         self.cursor = self.conn.cursor()
         
-    def check(cursor, conn):
+    def check(self, conn):
         "Function to check changes in the database."
-        if cursor.rowcount == 1:
+        if self.rowcount == 1:
             conn.commit()
             print('Operation performed successfully.')
         else:
@@ -113,10 +113,8 @@ class Data():
     def del_college(self,id_college:int):
         "Deletes a college record."
         try:
-            self.cursor.execute(
-                f"""DELETE FROM college WHERE id = ?""", 
-                (id_college,))
-            
+            self.cursor.execute("""DELETE FROM college WHERE id = ?""", (id_college,))
+
         except Exception as error:
             print(f'Error: {error}')
         else:
@@ -125,10 +123,8 @@ class Data():
     def del_occupation(self, id_occupation:int):
         "Deletes an occupation record."
         try:
-            self.cursor.execute(
-                f"""DELETE FROM work WHERE id = ?""", 
-                (id_occupation,))
-            
+            self.cursor.execute("""DELETE FROM work WHERE id = ?""", (id_occupation,))
+
         except Exception as error:
             print(f'Error: {error}')
         else:
@@ -137,10 +133,7 @@ class Data():
     def del_customer_by_id(self, id_customer:int):
         "Deletes a customer record by id."
         try:
-            self.cursor.execute(
-                f"""DELETE FROM customer WHERE id = ?""", 
-                (id_customer,)
-            )
+            self.cursor.execute("""DELETE FROM customer WHERE id = ?""", (id_customer,))
         except Excpetion as error:
             print(f'Error: {error}')
         else:
@@ -197,7 +190,7 @@ class Data():
             sql = f"""SELECT * FROM customer WHERE id = {id_customer}"""
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
-            
+
         except Exception as error:
             print(f'Error: {error}')
         else:
